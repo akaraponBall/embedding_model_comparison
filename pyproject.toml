@@ -1,0 +1,14 @@
+[project]
+name = "vector-embedding"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets>=4.1.1",
+    "langchain>=0.3.27",
+    "langchain-ollama>=0.3.8",
+    "langchain-openai>=0.3.33",
+    "numpy>=2.3.3",
+    "tqdm>=4.67.1",
+]
