@@ -28,12 +28,19 @@ LIMIT = 200                          # number of queries to evaluate (slice, for
 CORPUS_DOC_LIMIT = LIMIT * 10       # max docs to keep in corpus (None = use full corpus)
 K = 10                              # @K for metrics
 OLLAMA_BASE_URL = "http://localhost:11434"
+# MODELS = [
+#     "embeddinggemma",
+#     "qwen3-embedding:0.6b",
+#     "bge-large",
+#     "nomic-embed-text",
+#     "mxbai-embed-large"
+#     # "openai:text-embedding-3-small",  # requires OPENAI_API_KEY + extra deps
+# ]
 MODELS = [
-    "embeddinggemma",
+    "bge-m3",
     "qwen3-embedding:0.6b",
-    "bge-large",
-    "nomic-embed-text",
-    "mxbai-embed-large"
+    # "qwen3-embedding:4b",
+    "embeddinggemma"
     # "openai:text-embedding-3-small",  # requires OPENAI_API_KEY + extra deps
 ]
 USE_TITLE_PLUS_TEXT = False   # set True to concatenate "title: text" as the doc string
@@ -222,7 +229,8 @@ class Embedder:
 
 class OllamaEmbedder(Embedder):
     def __init__(self, model: str, base_url: str):
-        self.inner = OllamaEmbeddings(model=model, base_url=base_url)
+        # self.inner = OllamaEmbeddings(model=model, base_url=base_url, keep_alive=0)
+        self.inner = OllamaEmbeddings(model=model, keep_alive=0)
         self.name = f"ollama:{model}"
     def embed_docs(self, texts: List[str]) -> np.ndarray:
         return np.array(self.inner.embed_documents(texts), dtype=np.float32)
