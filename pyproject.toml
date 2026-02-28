@@ -1,5 +1,5 @@
 [project]
-name = "vector-embedding"
+name = "embedding_model_comparison"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
